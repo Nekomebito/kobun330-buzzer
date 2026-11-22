@@ -2,6 +2,44 @@
 <html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>古文単語330 早押し対戦</title>
 <style>
 :root{font-family:system-ui,"Yu Gothic",Meiryo,sans-serif;color:#222c38;background:#f5f4f0}*{box-sizing:border-box}body{margin:0;padding:20px}main{max-width:950px;margin:auto}.panel{background:white;border:1px solid #e3e3df;border-radius:18px;padding:24px;box-shadow:0 6px 25px #1d304014}h1{margin:0 0 8px;font-size:clamp(23px,4vw,34px)}.muted{color:#66717c}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.scores{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:18px 0}.score{padding:15px;border-radius:12px;background:#edf4ff;border:2px solid transparent}.score.p2{background:#eaf7ef}.score.winner{border-color:#e3b447}.score strong{font-size:28px}.timer{font-size:46px;font-weight:800;font-variant-numeric:tabular-nums;text-align:center}.timer.low{color:#d23636}.bar{height:12px;background:#e8e8e8;border-radius:10px;overflow:hidden}.fill{height:100%;background:#2676ce;width:100%;transition:width .08s linear}.fill.low{background:#d23636}.story{font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(19px,2.5vw,25px);line-height:1.9;padding:22px;background:#fbfaf6;border-radius:12px;margin:20px 0;white-space:pre-wrap}.target{font-weight:bold;text-decoration:underline;text-decoration-color:#d46b38;text-decoration-thickness:3px;text-underline-offset:5px}.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{border:2px solid #e1e4e8;border-radius:12px;padding:15px;min-height:88px;font-size:18px;background:white;text-align:left;cursor:pointer}.choice:disabled{cursor:default;opacity:.85}.choice.correct{background:#e4f6e7;border-color:#4aab68}.choice.wrong{background:#f9eded;border-color:#cf7b7b}.keys{display:block;font-size:12px;color:#66717c;margin-top:7px}button{font:inherit}button.action{padding:12px 20px;background:#245fa7;color:white;border:0;border-radius:10px;cursor:pointer}button.secondary{background:#e9edf2;color:#28323e}button:focus-visible{outline:3px solid #f0a830;outline-offset:2px}.controls{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}.status{min-height:55px;font-size:18px;font-weight:650;margin-top:14px}.hide{display:none!important}.explain{padding:14px;background:#f3f5f8;border-radius:10px;line-height:1.7}.notice{background:#fff4dd;padding:10px 13px;border-radius:8px}.mode{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.mode label{padding:12px;border:1px solid #ccd2d8;border-radius:10px;cursor:pointer}.footer{margin-top:15px;font-size:13px;color:#65707a}.result{text-align:center;font-size:23px;padding:20px}.tag{font-size:14px;color:#66717c}a{color:#245fa7}@media(max-width:570px){body{padding:8px}.panel{padding:15px}.choices{grid-template-columns:1fr}.choice{min-height:65px}.timer{font-size:38px}.story{padding:14px}}
+
+/* Compact gameplay layout: keep reading and answer text large. */
+#game{--compact-gap:8px}
+main.panel:has(#game:not(.hide)){padding:16px 22px}
+main.panel:has(#game:not(.hide)) .top{align-items:center;gap:8px}
+main.panel:has(#game:not(.hide)) h1{font-size:clamp(20px,2.4vw,27px);margin:0}
+main.panel:has(#game:not(.hide)) .top .muted{display:none}
+main.panel:has(#game:not(.hide))>.footer{margin-top:8px;font-size:11px}
+#game .scores{margin:8px 0 6px;gap:10px}
+#game .score{padding:7px 13px;line-height:1.35}
+#game .score strong{font-size:25px}
+#game .timer{font-size:34px;line-height:1.15;margin:0 0 4px}
+#game .bar{height:8px}
+#game #source{margin-top:5px;line-height:1.3;font-size:13px}
+#game .story{font-size:clamp(20px,2.35vw,25px);line-height:1.55;padding:13px 17px;margin:9px 0 8px}
+#game .choices{gap:9px;margin-top:5px}
+#game .choice{min-height:66px;padding:10px 13px;font-size:19px;line-height:1.35}
+#game .keys{margin-top:3px;font-size:12px}
+#game .status{min-height:24px;margin-top:7px;font-size:16px}
+#game .controls{margin-top:8px}
+#game .controls .action{padding:8px 14px;font-size:14px}
+#game .explain{padding:9px 12px}
+@media(max-width:650px){
+ main.panel:has(#game:not(.hide)){padding:12px}
+ #game .story{font-size:20px;padding:11px;line-height:1.55}
+ #game .choices{grid-template-columns:1fr 1fr;gap:7px}
+ #game .choice{font-size:16px;min-height:72px;padding:9px}
+ #game .score{padding:7px}
+ #game .score strong{font-size:22px}
+ #game .timer{font-size:30px}
+}
+@media(max-width:380px){#game .choices{grid-template-columns:1fr}#game .choice{min-height:54px}}
+@media(max-height:750px) and (min-width:651px){
+ main.panel:has(#game:not(.hide)){padding:11px 18px}
+ #game .story{padding:10px 15px;margin:7px 0}
+ #game .choice{min-height:59px;padding:8px 12px}
+ #game .timer{font-size:30px}
+}
 </style></head><body><main class="panel">
 <div class="top"><div><h1>古文単語330 早押し対戦</h1><div class="muted">動物説話の例文で勝負！ 制限時間を選択・誤答減点なし</div></div><span class="tag" id="progress"></span></div>
 <section id="start"><p>二人でキーボードの左右に分かれて遊びます。<b>選択肢を押した瞬間に回答</b>となります。先に正解した人に10点。誤答した人はその問題で再回答できません。</p><div class="scores"><div class="score"><b>プレイヤー1</b><p> A=①　S=②　D=③　F=④</p></div><div class="score p2"><b>プレイヤー2</b><p> H=①　J=②　K=③　L=④</p></div></div><div class="mode"><label><input type="radio" name="mode" value="10" checked> ランダム10問</label><label><input type="radio" name="mode" value="330"> 全330問</label></div><div class="mode" role="group" aria-label="制限時間"><span style="align-self:center;font-weight:700">1問の制限時間：</span><label><input type="radio" name="seconds" value="5"> 5秒</label><label><input type="radio" name="seconds" value="8" checked> 8秒</label><label><input type="radio" name="seconds" value="10"> 10秒</label></div><div class="controls"><button class="action" id="startBtn">対戦スタート</button><button class="action secondary hide" id="resumeBtn">保存した対戦を再開</button></div><p class="footer">330問モードは途中保存できます。データはこのブラウザ内に保存されます。</p></section>
